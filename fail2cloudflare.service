@@ -1,0 +1,17 @@
+[Unit]
+Description=Fail2Ban to Cloudflare sync worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+EnvironmentFile=/etc/fail2cloudflare/fail2cloudflare.env
+WorkingDirectory=/var/lib/fail2cloudflare
+ExecStart=/usr/local/bin/fail2cloudflare worker
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
