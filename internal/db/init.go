@@ -13,6 +13,8 @@ func Init(dbPath string) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+	sqlitedb.Exec("PRAGMA busy_timeout = 5000;")
+	sqlitedb.Exec("PRAGMA journal_mode = 'WAL';")
 
 	return sqlitedb, nil
 }
